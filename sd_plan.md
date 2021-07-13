@@ -79,6 +79,7 @@ To accommodate for the limited time frame of designing and creating this applica
     6. Confirming when the user completes the text
     7. Giving user option to randomly generate another body of text from same difficulty level 
     8. Implement option to return to menu for difficulty selection
+    9. Create exit option for user
 
 • (Priority 3): Creating the Net WPM system to record the user's typing productivity
     
