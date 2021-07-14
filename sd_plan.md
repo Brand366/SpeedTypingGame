@@ -65,8 +65,9 @@ To accommodate for the limited time frame of designing and creating this applica
 • (Priority 1): Creating a menu-like representation of the test that includes the difficulty selection for users
 
     1. Displaying the title and the relevant information to the user
-    2. Creating options for the user to select in regards to preffered difficulty. Linking to the external dictionaries 
-    3. Implenting timer to begin the test once the user selects the difficulty (or user press the enter key to begin)
+    2. Create input validator for user input (num input and key input)
+    2. Creating options for the user to select in regards to preffered difficulty using the difficulty selector funtion. 
+    3. User press the enter key to begin (timer)
     4. Display option to exit application
 
 • (Priority 2): Displaying the text for the chosen difficulty
