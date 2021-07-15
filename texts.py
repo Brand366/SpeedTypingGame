@@ -3,29 +3,6 @@ import json
 import random
 
 #Selects text body relative to text length and then store that data to easy_text, medium_text or hard_text depending on length of text
-'''def text_selector():
-    with gzip.open('examples.json.gz', 'r') as f:
-        data = json.load(f)
-        #sorted_data = sorted(data, key=lambda x: [2])
-    easy_text = []
-    med_text = []
-    hard_text = []
-    random_entry = random.choice(data)
-    random_text = random_entry[2]
-
-
-    while not (60 < len(random_text) <= 100):
-        yield easy_text.append(random_text)
-
-        if len(random_text) <= 200 and len(random_text) > 101:
-            yield medium_text.append(random_text)
-            
-        else:
-            yield hard_text.append(random_text)'''
-
-
-
-
 def text_selector():
     with gzip.open('examples.json.gz', 'r') as f:
         data = json.load(f)
@@ -49,45 +26,20 @@ def text_selector():
                 
         return easy_list, med_list, hard_list
 
-def random_entry():
+def random_entr():
     pass
 
 def easy():
-    random_entry = text_selector()
-    random_text = random.choice(random_entry[0]) 
+    easy_lst = text_selector()
+    random_text = random.choice(easy_lst[0]) 
     return random_text
 
 def med():
-    random_entry = text_selector()
-    random_text = random.choice(random_entry[1]) 
+    med_lst = text_selector()
+    random_text = random.choice(med_lst[1]) 
     return random_text
 
 def hard():
-    random_entry = text_selector()
-    random_text = random.choice(random_entry[2]) 
+    hard_lst = text_selector()
+    random_text = random.choice(hard_lst[2]) 
     return random_text
-
-
-
-'''def text_selector():
-    with gzip.open('examples.json.gz', 'r') as f:
-        data = json.load(f)
-        #sorted_data = sorted(data, key=lambda x: [2])
-        easy_text = ""
-        med_text = ""
-        hard_text = ""
-        random_text = ""
-
-        while not (60 < len(random_text) <= 100):
-            random_entry = random.choice(data)
-            random_text = random_entry[2]
-
-            return easy_text.join(random_text)
-
-            if len(random_text) <= 200 and len(random_text) > 101:
-                return medium_text.join(random_text)
-
-            else:
-                return hard_text.join(random_text)
-
-print(text_selector())'''
