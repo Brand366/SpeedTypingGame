@@ -2,6 +2,10 @@ import sys
 import shutil
 import time
 import random
+from quotes import texts
+
+def center_output(row):
+    pass
 
 #Center output through print
 def print_center(row):
@@ -31,7 +35,7 @@ def validator(prompt):
         try:
             user_input = int(input(prompt))
             if user_input in [1, 2, 3]:
-                break
+                return user_input            
             else:
                 print_center("Sorry, please enter a valid number.\n")
         except ValueError:
@@ -42,16 +46,17 @@ def validator(prompt):
 def start_test():
 
     difficulties = {
-        1 : easy_text()
-        2 : med_text()
-        3 : hard_text()
+        1 : texts.easy(),
+        2 : texts.med(),
+        3 : texts.hard()
     }
 
-    difficulty = valid_input("Press '1' for [Easy], '2' for [Medium], '3' for [Hard]\n\n")
+    difficulty = validator("Press '1' for [Easy], '2' for [Medium], '3' for [Hard]\n\n")
 
-    if difficulty in difficulties:
-        print_center("Awesome! Press the 'enter' key to begin. Have fun!\n")
+    if difficulty in difficulties.keys():
+        print_center(f"Awesome! You have selected {}, Hav fun!\n")
+        print_center("Good luck!\n")
 
 if __name__ == '__main__':
     title_screen()
-    validator()
+    start_test()
