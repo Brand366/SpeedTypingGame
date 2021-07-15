@@ -6,12 +6,12 @@ import random
 import texts
 from subprocess import call
 
-#Fucntion to clear screen of text
+#Function to clear screen of text
 def clear():
     _ = call('clear' if os.name == 'posix' else 'cls') 
 
-def center_output(row):
-    pass
+def center(row):
+    pass 
 
 #Center output through print
 def print_center(row):
@@ -44,17 +44,47 @@ def validator(prompt):
             if response in [1, 2, 3]:
                 return response            
             else:
-                print_center("Sorry, please enter a valid number.\n")
+                print_center("Sorry, please enter a valid number.\n\n")
         except ValueError:
-            print_center("Sorry, please enter a valid number.\n")
+            print_center("Sorry, please enter a valid number.\n\n")
 
-
+#This function displays the randomly selected text from the difficulty the user selected 
 def text_area():
+    selected_text = start_test()
+    print_center("\n\n")
+    print_center(selected_text)
+
+    user_option = validator('''
+            Please find options below:
+
+            1  - Reset text
+
+            2 - Exit application
+
+            \n\n''')
+        
+    if user_option == 1:
+        return text_area()
+
+    elif user_option == 2:
+        print_center("Thanks for playing!\n\n")
+        time.sleep(1)
+        sys.exit()
+
+
+    
+
+def compare_texts():
+    pass
+
+def wpm():
+    pass
+
+def acc():
     pass
 
 
-
-#This function is used to display the difficulty selection to user 
+#This function is used to display the difficulty selection to user and store the selection of the difficulty (clears screen after user selects)
 def start_test():
 
     difficulties = {
@@ -66,15 +96,15 @@ def start_test():
     difficulty = validator("Press '1' for [Easy], '2' for [Medium], '3' for [Hard]\n\n")
 
     if difficulty in difficulties.keys():
-        #print_center(f"Awesome! You have selected {}, Hav fun!\n")
-        selected_text = difficulties[difficulty]
-        print_center("Good luck!\n\n")
-        time.sleep(1)
+        user_difficulty = difficulties[difficulty]
+        #print_center(f"Awesome! You have selected {user_difficulty}, Hav fun!\n")
+        print_center("Good Luck!")
+        time.sleep(2)
         clear()
-        return selected_text
-    
+        return user_difficulty
+        
 
 if __name__ == '__main__':
     title_screen()
-    start_test()
     text_area()
+
