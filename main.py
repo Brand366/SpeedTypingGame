@@ -73,43 +73,43 @@ def text_area():
         user_options = option_validator('''
         Please find the options below:
 
-        1 - Reset given text.
+        1 - To begin typing text given text.
 
-        2 - Reset with new difficulty.
+        2 - Reset given text.
 
-        3 - To begin typing text given text.
+        3 - To choose new difficulty.
 
         4 - Exit application.
 
         ''')
 
         if user_options == 1:
-            reset_txt = texts.easy()
-            print_center(reset_txt)
-
-        elif user_options == 2:
-            print_center(start_test())
-
-        elif user_options == 3:
             print_center("Enter your text below:\n\n")
             usr_txt = input("")
             break
+
+        # elif user_options == 2:
+        #     if selected_txt == texts.easy():
+        #         print_center(texts.easy())
+        #     elif selected_txt == texts.med():
+        #         print_center(texts.med())
+        #     else:
+        #         print_center(texts.hard())
+        elif user_options == 3:
+            print_center(start_test())
         else:
             print_center("Okay, thank you for playing!\n")
             time.sleep(2)
             sys.exit()
-
-    print_center(acc(selected_txt, usr_txt))
+            
+    print_center(f"You're accuracy was {acc(selected_txt, usr_txt)}%!!!")
+    
 
     return selected_txt, usr_txt 
 
-#Displays the users options within the text area
-def usr_txt_options():
-    pass
-    
 
 #Calculates the users wpm after comparing text
-def wpm():
+def wpm(selected_txt, usr_txt):
     pass
 
 #Calculates accuracy of typed text by the user when compared to given text
@@ -126,10 +126,10 @@ def acc(selected_txt, usr_txt):
                 same_charcters += given_txt[i]
     except IndexError:
         pass
-             
-    txt_acc = len(same_charcters) / len(given_txt) * 100
 
-    return str(txt_acc)
+    txt_acc = len(same_charcters) / len(given_txt) * 100
+    txt_acc_rounded = round(txt_acc,2)
+    return str(txt_acc_rounded)
 
 #This function calls the easy, med, and hard functions and stores them in a dict as key-value pairs, to be called via their key
 def diff_dict():
