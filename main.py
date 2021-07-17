@@ -39,7 +39,7 @@ def title_screen():
     print_center("First, please select the desired level of difficulty:\n\n")
    
 #This will call and store the user data used for the leader board feature
-def user_data():
+def usr_data():
     name = input("Please enter your name to be added to the leader board: ")
     #call wpm and acc funtions here and then append to external txt file to be called when user finishes test
     return name
@@ -60,10 +60,12 @@ def option_validator(prompt):
                 print_center("\nSorry, please enter a valid number.\n\n")         
         except ValueError:
             print_center("\nSorry, that appears to not be a number. Please enter a valid number.\n\n")
+        except KeyboardInterrupt:
+            print("     You can't leave.... please.... play my game....\n")
 
 #This function displays the randomly selected text from the difficulty the user selected and displays options available to the user
 def text_area():
-    selected_txt = start_test()
+    selected_txt = difficulty_select()
     print_center('\n')
     print_center(selected_txt)
     print_center('\n')
@@ -84,62 +86,55 @@ def text_area():
 
         if user_options == 1:
             print_center("Enter your text below:\n\n")
+            start = time.time()
             usr_txt = input("")
+            end = time.time()
             break
 
-        # elif user_options == 2:
-        #     if selected_txt == texts.easy():
-        #         print_center(texts.easy())
-        #     elif selected_txt == texts.med():
-        #         print_center(texts.med())
-        #     else:
-        #         print_center(texts.hard())
+        elif user_options == 2:
+            all_text()
         elif user_options == 3:
-            print_center(start_test())
+            print_center(difficulty_select())
         else:
             print_center("Okay, thank you for playing!\n")
             time.sleep(2)
             sys.exit()
 
-    usr_wpm_acc = wpm_acc(selected_txt, usr_txt)            
+    usr_wpm_acc = wpm_acc(selected_txt, usr_txt, start, end)            
     print_center(f"You're accuracy was {usr_wpm_acc[0]}%\n")
     print_center(f"And you're WPM was {usr_wpm_acc[1]}\n")
-    return selected_txt, usr_txt 
+    return selected_txt, usr_txt, start, end
 
 
 #Takes the given text by the selected difficulty and the typed text by the user
 #Then calculates the WPM and accuracy after comparing the two texts and taking in the time the user spend typing the text
-def wpm_acc(selected_txt, usr_txt):
-    given_txt = selected_txt
+def wpm_acc(selected_txt, usr_txt, start, end):
+    
 
-    start = time.time()
-    typed_txt = usr_txt
-    end = time.time()
+    txt_count = len(selected_txt.split())
 
-    txt_count = len(given_txt.split())
-
-    txt_acc = len(set(typed_txt.split()) & set(given_txt.split()))
-
-    usr_acc = txt_acc / txt_count * 100
-    usr_acc_rounded = round(usr_acc,2)
+    txt_acc = len(set(usr_txt.split()) & set(selected_txt.split()))
+    usr_acc = round(txt_acc / txt_count * 100, 2)
 
     usr_time = end - start
-    usr_wpm = (txt_count/usr_time)
+    usr_wpm = round((txt_count/usr_time), 2)
 
-    return usr_acc_rounded, usr_wpm
+    # diff1 = ''
+    # diff2 = ''
 
-    # same_charcters = ''
+    # max_txt_len = len(typed_txt) if len(given_txt)<len(typed_txt) else len(given_txt)
 
-    # try:
-    #     for i in range(len(given_txt)):
-    #         if given_txt[i] == typed_txt[i]:
-    #             same_charcters += given_txt[i]
-    # except IndexError:
-    #     pass
+    # for i in range(max_txt_len):
+    #     given_txt_char = given_txt[i:i+1]
+    #     typed_txt_char = typed_txt[i:i+1]
 
-    # txt_acc = len(same_charcters) / len(given_txt) * 100
-    # txt_acc_rounded = round(txt_acc,2)
-    # return str(txt_acc_rounded)
+    #     if given_txt_char != typed_txt_char:
+    #         diff1 += given_txt_char
+    #         diff2 += typed_txt_char
+    # print(diff1)
+    # print(diff2)
+
+    return usr_acc, usr_wpm
 
 #This function calls the easy, med, and hard functions and stores them in a dict as key-value pairs, to be called via their key (most likely will move back into start_test())
 def diff_dict():
@@ -151,7 +146,7 @@ def diff_dict():
     return difficulties
 
 #This function asks the user to select the difficulty of the text and stores the selection of the difficulty (clears screen after user selects)
-def start_test():
+def difficulty_select():
     difficulty = option_validator("Press '1' for [Easy], '2' for [Medium], '3' for [Hard]\n\n")
 
     if difficulty in diff_dict():
@@ -162,7 +157,6 @@ def start_test():
         clear()
         return user_difficulty
         
-
 if __name__ == '__main__':
     title_screen()
     text_area()
