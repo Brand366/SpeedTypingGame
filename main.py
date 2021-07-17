@@ -69,13 +69,12 @@ def text_area():
     print_center('\n')
     
     while True:
-        
         user_options = option_validator('''
         Please find the options below:
 
         1 - To begin typing text given text.
 
-        2 - Reset given text.
+        2 - To reset with random text no matter the difficulty.
 
         3 - To choose new difficulty.
 
@@ -101,37 +100,48 @@ def text_area():
             print_center("Okay, thank you for playing!\n")
             time.sleep(2)
             sys.exit()
-            
-    print_center(f"You're accuracy was {acc(selected_txt, usr_txt)}%!!!")
-    
 
+    usr_wpm_acc = wpm_acc(selected_txt, usr_txt)            
+    print_center(f"You're accuracy was {usr_wpm_acc[0]}%\n")
+    print_center(f"And you're WPM was {usr_wpm_acc[1]}\n")
     return selected_txt, usr_txt 
 
 
-#Calculates the users wpm after comparing text
-def wpm(selected_txt, usr_txt):
-    pass
-
-#Calculates accuracy of typed text by the user when compared to given text
-def acc(selected_txt, usr_txt):
-
+#Takes the given text by the selected difficulty and the typed text by the user
+#Then calculates the WPM and accuracy after comparing the two texts and taking in the time the user spend typing the text
+def wpm_acc(selected_txt, usr_txt):
     given_txt = selected_txt
+
+    start = time.time()
     typed_txt = usr_txt
-    
-    same_charcters = ''
+    end = time.time()
 
-    try:
-        for i in range(len(given_txt)):
-            if given_txt[i] == typed_txt[i]:
-                same_charcters += given_txt[i]
-    except IndexError:
-        pass
+    txt_count = len(given_txt.split())
 
-    txt_acc = len(same_charcters) / len(given_txt) * 100
-    txt_acc_rounded = round(txt_acc,2)
-    return str(txt_acc_rounded)
+    txt_acc = len(set(typed_txt.split()) & set(given_txt.split()))
 
-#This function calls the easy, med, and hard functions and stores them in a dict as key-value pairs, to be called via their key
+    usr_acc = txt_acc / txt_count * 100
+    usr_acc_rounded = round(usr_acc,2)
+
+    usr_time = end - start
+    usr_wpm = (txt_count/usr_time)
+
+    return usr_acc_rounded, usr_wpm
+
+    # same_charcters = ''
+
+    # try:
+    #     for i in range(len(given_txt)):
+    #         if given_txt[i] == typed_txt[i]:
+    #             same_charcters += given_txt[i]
+    # except IndexError:
+    #     pass
+
+    # txt_acc = len(same_charcters) / len(given_txt) * 100
+    # txt_acc_rounded = round(txt_acc,2)
+    # return str(txt_acc_rounded)
+
+#This function calls the easy, med, and hard functions and stores them in a dict as key-value pairs, to be called via their key (most likely will move back into start_test())
 def diff_dict():
     difficulties = {
         1 : texts.easy(),
@@ -142,7 +152,6 @@ def diff_dict():
 
 #This function asks the user to select the difficulty of the text and stores the selection of the difficulty (clears screen after user selects)
 def start_test():
-
     difficulty = option_validator("Press '1' for [Easy], '2' for [Medium], '3' for [Hard]\n\n")
 
     if difficulty in diff_dict():
