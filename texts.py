@@ -18,10 +18,10 @@ def text_selector():
             if len(text) <= 80:
                 easy_list.append(text)
                 
-            elif len(text) >= 81 and len(text) <= 180:
+            elif len(text) >= 81 and len(text) <= 170:
                 med_list.append(text)
                 
-            else:
+            elif len(text) <= 250:
                 hard_list.append(text)
                 
         return easy_list, med_list, hard_list
@@ -42,5 +42,7 @@ def hard():
     hard_text = random.choice(hard_lst[2]) 
     return hard_text
 
-def all_text(easy_text, med_text, hard_text):
-    return easy_text, med_text, hard_text
+def all_text():
+    all_lst = text_selector()
+    all_text = random.choice(all_lst)
+    return all_text
