@@ -9,3 +9,8 @@ What I found so far is that prevalent modules exist already to keep track of WPM
 
 ## Status Update 2:
 
+For this update, I have completed the difficulty functions to extract the appropriate text and then store that text in the relevant list based on length of text. Those lists are then stored in their respective functions and used in the start_test function to select the difficulty and begin the test. So far the text displays after the user selects the text with the screen being cleared beforehand with a function called clear. The clear function simply does what the name implies and clears the screen of all text. This is to prevent visual text overload on the user. 
+
+The function that displays the text have options to either reset the text or exit the program. Will need to do revise slightly to get working as desired. Also implemented the time.sleep() function along with importing from subpross to use the call function to make the transitions a bit smoother for user experience.
+
+So for the struggles of the application... right now it's the general flow of program that is getting me stuck essentially. I am writing out multiple flow charts, and writing pseudo code to kick-start my thought process on the flow but it never seems to click as "there are many ways to skin a cat". I know I simply have to produce a MVP at the very least and then refactor from there.
