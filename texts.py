@@ -10,6 +10,7 @@ def text_selector():
         easy_list = []
         med_list = []
         hard_list = []
+        any_list = []
         
         for item in data:
 
@@ -23,8 +24,10 @@ def text_selector():
                 
             elif len(text) <= 250:
                 hard_list.append(text)
+            else:
+                any_list.append(text)
                 
-        return easy_list, med_list, hard_list
+        return easy_list, med_list, hard_list, any_list
 
 
 def easy():
@@ -42,7 +45,7 @@ def hard():
     hard_text = random.choice(hard_lst[2]) 
     return hard_text
 
-def all_text():
+def all():
     all_lst = text_selector()
-    all_text = random.choice(all_lst)
+    all_text = random.choice(all_lst[3])
     return all_text
