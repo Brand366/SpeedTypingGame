@@ -1,0 +1,39 @@
+What to import to use the Application:
+
+    • os 
+    • sys
+    • shutil
+    • json
+    • gz
+    • time
+    • from subprocess import call
+    
+These will come included in both the main.py and texts.py files.
+
+Steps to Use the Application:
+
+    1. Open the desired Terminal
+    2. Navigate to the src folder
+    3. Use the wrapper.sh script to run the application
+        • Use "--about" for information about the application 
+        • Use "--help to navigate to "  
+    4. The wrapper.sh script will check if you have python installed and if have version 3 or later
+    5. To exit the application either use "/z" or select an exit option when prompted in the application
+
+
+Difficulty Feature:
+
+This features function in the way of offering the choice of selecting a difficulty it is possible to choose an easy, medium, hard, or selecting any text to be returned. 
+The user will be able to select a difficulty after entering their name and will be given the option reset the difficulty after selecting one. 
+
+Accuracy and WPM Feature:
+
+This feature reports the WPM (words per minute) and accuracy of the text that has been typed. This is reported after the text has been
+typed and the user is given the option to store their name and scores in the leader board. The accuracy and WPM values will not entirely be accurate. 
+The user should refrain from not entering any text or backspacing, as this will return erroneous values.
+
+Leader board Feature:
+
+If the user chooses to store their name, WPM, and accuracy in the leader board, the application will display a three-column table layout.
+This table displays the user's name, accuracy, and WPM that they achieved after finishing a text. It displays up to 10 entries 
+being sorted by the highest accuracy achieved by the respective entry/user. Then the option to reset the application or exit is given.
