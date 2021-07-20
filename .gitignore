@@ -1,1 +1,4 @@
 venv/
+.vscode/
+stg_flowchart.drawio:Zone.Identifier/
+src/__pycache__
